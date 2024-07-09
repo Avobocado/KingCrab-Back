@@ -1,6 +1,7 @@
-package org.example.kingcrabback.entity;
+package org.example.kingcrabback.domain.post.entity;
 
 import jakarta.persistence.*;
+import org.example.kingcrabback.domain.comment.entity.Comment;
 
 import java.util.List;
 
