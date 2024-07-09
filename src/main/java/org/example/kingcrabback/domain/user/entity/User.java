@@ -1,4 +1,4 @@
-package org.example.kingcrabback.entity;
+package org.example.kingcrabback.domain.user.entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
