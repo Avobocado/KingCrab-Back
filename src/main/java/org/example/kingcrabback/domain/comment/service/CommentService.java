@@ -5,9 +5,18 @@ import lombok.RequiredArgsConstructor;
 import org.example.kingcrabback.domain.comment.dto.CommentRequest;
 import org.example.kingcrabback.domain.comment.entity.Comment;
 import org.example.kingcrabback.domain.comment.repository.CommentRepository;
+<<<<<<< HEAD
 import org.example.kingcrabback.domain.post.repository.PostRepository;
 import org.springframework.stereotype.Service;
 
+=======
+import org.example.kingcrabback.domain.post.entity.Post;
+import org.example.kingcrabback.domain.post.repository.PostRepository;
+import org.springframework.stereotype.Service;
+
+import java.util.Optional;
+
+>>>>>>> 800a070afca7d0d01ddf759fb48e427162d02817
 @Service
 @RequiredArgsConstructor
 public class CommentService {
