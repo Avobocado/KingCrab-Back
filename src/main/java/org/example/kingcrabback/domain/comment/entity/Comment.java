@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import org.example.kingcrabback.domain.post.entity.Post;
 
+import java.time.LocalDateTime;
+
 @Entity
 @NoArgsConstructor
 public class Comment {
@@ -13,6 +15,8 @@ public class Comment {
     private long id;
 
     private String comment;
+
+    private LocalDateTime now;
 
     public Comment(String comment, Post post) {
         this.comment = comment;
