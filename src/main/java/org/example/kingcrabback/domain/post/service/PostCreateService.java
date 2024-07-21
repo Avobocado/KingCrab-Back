@@ -18,6 +18,7 @@ public class PostCreateService {
             Post.builder()
                     .title(postRequest.getTitle())
                     .content(postRequest.getContent())
+                    .name(postRequest.getName())
                     .build()
         );
     }
