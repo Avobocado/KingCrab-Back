@@ -1,6 +1,5 @@
 package org.example.kingcrabback.domain.post.service;
 
-import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.example.kingcrabback.domain.post.dto.PostRequest;
 import org.example.kingcrabback.domain.post.entity.Post;
@@ -9,17 +8,15 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class PostCreateService {
+public class PostDeleteService {
     private final PostRepository postRepository;
 
-    @Transactional
-    public Post createPost(PostRequest postRequest){
-        return postRepository.save(
-            Post.builder()
-                    .name(postRequest.getName())
-                    .title(postRequest.getTitle())
-                    .content(postRequest.getContent())
-                    .build()
-        );
+    public void deletePost(Long id, PostRequest postRequest){
+        Post post = postRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException(""));
+        if(!post.getName().equals(postRequest.getName())){
+            throw new RuntimeException("");
+        }
+        postRepository.delete(post);
     }
 }

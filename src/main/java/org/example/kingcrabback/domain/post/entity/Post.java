@@ -19,10 +19,16 @@ public class Post {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    private String name;
     private String title;
     private String content;
-    private String name;
+
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "post")
     private List<Comment> commentList;
+
+    public void updatePost(String title, String content){
+        this.title = title;
+        this.content = content;
+    }
 }
