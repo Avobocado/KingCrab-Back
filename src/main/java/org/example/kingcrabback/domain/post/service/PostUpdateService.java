@@ -1,6 +1,5 @@
 package org.example.kingcrabback.domain.post.service;
 
-import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.example.kingcrabback.domain.post.dto.PostRequest;
 import org.example.kingcrabback.domain.post.entity.Post;
@@ -9,17 +8,19 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class PostCreateService {
+public class PostUpdateService {
     private final PostRepository postRepository;
 
-    @Transactional
-    public Post createPost(PostRequest postRequest){
-        return postRepository.save(
-            Post.builder()
-                    .name(postRequest.getName())
-                    .title(postRequest.getTitle())
-                    .content(postRequest.getContent())
-                    .build()
-        );
+    public void updatePost(Long id, PostRequest postRequest){
+        Post post = postRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Post가 NULL입니다"));
+
+    post.updatePost(
+            postRequest.getTitle(),
+            postRequest.getContent()
+    );
+
+    postRepository.save(post);
+
     }
 }
