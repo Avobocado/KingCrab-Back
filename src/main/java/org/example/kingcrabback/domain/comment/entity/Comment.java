@@ -1,7 +1,6 @@
 package org.example.kingcrabback.domain.comment.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import org.example.kingcrabback.domain.post.entity.Post;
 
@@ -14,11 +13,13 @@ public class Comment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
+    private String username;
     private String comment;
 
     private LocalDateTime now;
 
-    public Comment(String comment, Post post) {
+    public Comment(String username, Post post) {
+        this.username = username;
         this.comment = comment;
         this.post = post;
     }
