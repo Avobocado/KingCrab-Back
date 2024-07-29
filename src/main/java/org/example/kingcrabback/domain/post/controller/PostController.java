@@ -26,8 +26,8 @@ public class PostController {
     }
 
     @DeleteMapping("{id}")
-    public void deletePost(@PathVariable Long id, @RequestBody PostRequest postRequest){
-        postDeleteService.deletePost(id, postRequest);
+    public void deletePost(@PathVariable Long id){
+        postDeleteService.deletePost(id);
     }
 
     @PatchMapping("{id}")

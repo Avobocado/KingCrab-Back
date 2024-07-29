@@ -11,12 +11,7 @@ import org.springframework.stereotype.Service;
 public class PostDeleteService {
     private final PostRepository postRepository;
 
-    public void deletePost(Long id, PostRequest postRequest){
-        Post post = postRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException(""));
-        if(!post.getName().equals(postRequest.getName())){
-            throw new RuntimeException("");
-        }
-        postRepository.delete(post);
+    public void deletePost(Long id){
+        postRepository.deleteById(id);
     }
 }
