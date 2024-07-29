@@ -2,7 +2,7 @@ package org.example.kingcrabback.domain.comment.service;
 
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
-import org.example.kingcrabback.domain.comment.dto.CommentRequest;
+import org.example.kingcrabback.domain.comment.dto.request.CommentRequest;
 import org.example.kingcrabback.domain.comment.entity.Comment;
 import org.example.kingcrabback.domain.comment.repository.CommentRepository;
 import org.example.kingcrabback.domain.post.repository.PostRepository;
