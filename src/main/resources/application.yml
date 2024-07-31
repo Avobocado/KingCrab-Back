@@ -16,8 +16,7 @@ spring:
     open-in-view: false
 
 jwt:
-  refresh-time: 2592000000
   access-time: 999999999999999999
   prefix: Bearer
   header: Authorization
-  secret-key: sdfsdfds
+  secret-key: sdfsdfdsASDFASDFASDF

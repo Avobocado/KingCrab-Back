@@ -21,8 +21,7 @@ public class JwtProvider {
     private final JwtProperties jwtProperties;
     private final AuthDetailsService authDetailsService;
 
-    private static final String ACCESS_KEY = "access_token";
-    private static final String REFRESH_KEY = "refresh_token";
+    private static final String ACCESS_KEY = "asdfasdfasdfasdfasdfasdfa";
 
     @Transactional
     public TokenResponse createToken(String email) {
@@ -67,8 +66,6 @@ public class JwtProvider {
                     .parseClaimsJws(token).getBody();
         } catch (ExpiredJwtException e) {
             throw new RuntimeException("");
-        } catch (Exception e) {
-            throw new  RuntimeException("");
         }
     }
 }
