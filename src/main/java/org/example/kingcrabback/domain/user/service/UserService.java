@@ -1,5 +1,6 @@
 package org.example.kingcrabback.domain.user.service;
 
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.example.kingcrabback.domain.user.controller.LoginRequest;
 import org.example.kingcrabback.domain.user.controller.TokenResponse;
@@ -14,6 +15,7 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
+@Getter
 public class UserService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
