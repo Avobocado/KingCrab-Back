@@ -14,8 +14,8 @@ public class DeleteComment {
     private final PostRepository postRepository;
 
     public void deleteComment(Long commentId) {
-        Comment comment = commentRepository.findById(commentId).orElseThrow();
-        commentRepository.deleteById(commentId);
+        Comment comment = commentRepository.findById(commentId).orElseThrow(()->new RuntimeException("Comment를 찾을 수 없습니다."));
+        commentRepository.delete(comment);
     }
 
 }

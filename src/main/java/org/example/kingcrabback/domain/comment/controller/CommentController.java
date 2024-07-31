@@ -1,12 +1,16 @@
 package org.example.kingcrabback.domain.comment.controller;
 
 import lombok.RequiredArgsConstructor;
-import org.example.kingcrabback.domain.comment.dto.CommentRequest;
+import org.example.kingcrabback.domain.comment.dto.request.CommentRequest;
+import org.example.kingcrabback.domain.comment.dto.response.CommentResponse;
 import org.example.kingcrabback.domain.comment.entity.Comment;
 import org.example.kingcrabback.domain.comment.service.*;
 import org.springframework.web.bind.annotation.*;
 
-@RestController("/comment")
+import java.util.List;
+
+@RestController
+@RequestMapping("comment")
 @RequiredArgsConstructor
 public class CommentController {
 
@@ -17,13 +21,13 @@ public class CommentController {
 
 
     @PostMapping("/create")
-    public void createComment(CommentRequest commentRequest) {
+    public void createComment(@RequestBody CommentRequest commentRequest) {
         createComment.createComment(commentRequest);
     }
 
-    @GetMapping("/read/{commentId}")
-    public Comment readComment(@PathVariable Long commentId) {
-        return readComment.readComment(commentId);
+    @GetMapping("/read")
+    public List<CommentResponse> readComment() {
+        return readComment.readALlComment();
     }
 
     @DeleteMapping("/delete/{commendId}")

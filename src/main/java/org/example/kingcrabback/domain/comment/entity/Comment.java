@@ -1,13 +1,16 @@
 package org.example.kingcrabback.domain.comment.entity;
 
 import jakarta.persistence.*;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.example.kingcrabback.domain.post.entity.Post;
 
 import java.time.LocalDateTime;
 
 @Entity
 @NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Builder
 public class Comment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,11 +21,6 @@ public class Comment {
 
     private LocalDateTime now;
 
-    public Comment(String username, Post post) {
-        this.username = username;
-        this.comment = comment;
-        this.post = post;
-    }
 
 
     public void updateComment(String comment) {
