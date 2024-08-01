@@ -1,7 +1,7 @@
 package org.example.kingcrabback.domain.utill.config;
 
 import lombok.RequiredArgsConstructor;
-import org.example.kingcrabback.domain.utill.filter.JwtTokenFilter;
+import org.example.kingcrabback.domain.utill.jwt.auth.filter.JwtTokenFilter;
 import org.example.kingcrabback.domain.utill.jwt.auth.JwtProvider;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -25,6 +25,11 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @Configuration
 public class SecurityConfig {
     private final JwtProvider jwtProvider;
+
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {

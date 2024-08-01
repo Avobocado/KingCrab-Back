@@ -25,7 +25,7 @@ public class UserService {
         if (!passwordEncoder.matches(loginRequest.getPassword(), user.getPassword())) {
             throw new RuntimeException("asdf");
         }
-        return jwtProvider.createToken(user.getUserName());
+        return new TokenResponse(jwtProvider.createAccessToken(user.getUserName()));
     }
 
     @Transactional
