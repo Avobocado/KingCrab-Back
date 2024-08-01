@@ -25,9 +25,9 @@ public class CommentController {
         createComment.createComment(commentRequest);
     }
 
-    @GetMapping("/read")
-    public List<CommentResponse> readComment() {
-        return readComment.readALlComment();
+    @GetMapping("/read/{postId}")
+    public List<CommentResponse> readComment(@PathVariable Long postId) {
+        return readComment.readALlComment(postId);
     }
 
     @DeleteMapping("/delete/{commendId}")
