@@ -21,9 +21,7 @@ public class UserService {
 
     @Transactional
     public TokenResponse login(LoginRequest loginRequest) {
-        System.out.println("login메서드1");
         User user = userRepository.findByUserName(loginRequest.getUserName()).orElseThrow(()->new RuntimeException(""));
-        System.out.println("login메서드2");
         if (!passwordEncoder.matches(loginRequest.getPassword(), user.getPassword())) {
             throw new RuntimeException("asdf");
         }
