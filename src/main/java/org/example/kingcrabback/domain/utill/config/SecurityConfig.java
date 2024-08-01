@@ -50,7 +50,8 @@ public class SecurityConfig {
         http
                 .cors(Customizer.withDefaults())
                 .authorizeRequests(auth -> auth
-                        .anyRequest().permitAll()
+                        .requestMatchers("/login","/signup","/","post/read","comment/read").permitAll()
+                        .anyRequest().authenticated()
                 );
 
         http.exceptionHandling(handler ->
