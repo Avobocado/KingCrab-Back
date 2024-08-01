@@ -9,8 +9,10 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.example.kingcrabback.domain.user.controller.TokenResponse;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
+import org.springframework.util.StringUtils;
 
 import java.util.Date;
 
@@ -19,56 +21,54 @@ import java.util.Date;
 public class JwtProvider {
 
     private final JwtProperties jwtProperties;
-    private final AuthDetailsService authDetailsService;
 
-    private static final String ACCESS_KEY = "access_token";
-    private static final String REFRESH_KEY = "refresh_token";
+    private final AuthDetailsService customUserDetailsService;
 
-    @Transactional
-    public TokenResponse createToken(String email) {
-        String accessToken = createToken(email, ACCESS_KEY, 1000*jwtProperties.getAccessTime());
-        return new TokenResponse(accessToken);
-    }
+    // access token 생성
+    public String createAccessToken(String account_id) {
 
-    private String createToken(String email, String type, Long time) {
         Date now = new Date();
-        return Jwts.builder().signWith(SignatureAlgorithm.HS256, jwtProperties.getSecretKey())
-                .setSubject(email)
-                .setHeaderParam("typ", type)
+
+        return Jwts.builder()
+                .setSubject(account_id)
+                .claim("type", "access")
                 .setIssuedAt(now)
-                .setExpiration(new Date(now.getTime() + time))
+                .setExpiration(new Date(now.getTime() + jwtProperties.getAccessTime() * 1000))
+                .signWith(SignatureAlgorithm.HS256, jwtProperties.getSecretKey())
                 .compact();
     }
 
-    public String resolveToken(HttpServletRequest request) {
-        String bearer = request.getHeader("Authorization");
-        return parseToken(bearer);
-    }
 
-    public String parseToken(String bearerToken) {
-        if (bearerToken != null && bearerToken.startsWith("Bearer ")) {
-            return bearerToken.replace("Bearer ", "");
-        }
-        return null;
-    }
 
-    public UsernamePasswordAuthenticationToken authorization(String token) {
-        UserDetails userDetails = authDetailsService.loadUserByUsername(getTokenSubject(token));
+    // 토큰에 담겨있는 userId로 SpringSecurity Authentication 정보를 반환하는 메서드
+    public Authentication getAuthentication(String token) {
+        Claims claims = getClaims(token);
+        UserDetails userDetails = customUserDetailsService.loadUserByUsername(claims.getSubject());
         return new UsernamePasswordAuthenticationToken(userDetails, "", userDetails.getAuthorities());
     }
 
-    private String getTokenSubject(String subject) {
-        return getTokenBody(subject).getSubject();
-    }
-
-    private Claims getTokenBody(String token) {
+    private Claims getClaims(String token) {
         try {
-            return Jwts.parser().setSigningKey(jwtProperties.getSecretKey())
-                    .parseClaimsJws(token).getBody();
+            return Jwts
+                    .parser()
+                    .setSigningKey(jwtProperties.getSecretKey())
+                    .parseClaimsJws(token)
+                    .getBody();
         } catch (ExpiredJwtException e) {
             throw new RuntimeException("");
         } catch (Exception e) {
-            throw new  RuntimeException("");
+            throw new RuntimeException("");
         }
+    }
+
+    // HTTP 요청 헤더에서 토큰을 가져오는 메서드
+    public String resolveToken(HttpServletRequest request) {
+        String bearerToken = request.getHeader(jwtProperties.getHeader());
+
+        if (StringUtils.hasText(bearerToken) && bearerToken.startsWith(jwtProperties.getPrefix())
+                && bearerToken.length() > jwtProperties.getPrefix().length() + 1) {
+            return bearerToken.substring(7);
+        }
+        return null;
     }
 }

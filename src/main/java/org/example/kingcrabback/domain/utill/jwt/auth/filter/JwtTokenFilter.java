@@ -1,4 +1,4 @@
-package org.example.kingcrabback.domain.utill.filter;
+package org.example.kingcrabback.domain.utill.jwt.auth.filter;
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -23,7 +23,7 @@ public class JwtTokenFilter extends OncePerRequestFilter {
             String token = jwtProvider.resolveToken(request);
 
             if (token != null) {
-                Authentication authentication = jwtProvider.authorization(token);
+                Authentication authentication = jwtProvider.getAuthentication(token);
                 SecurityContextHolder.getContext().setAuthentication(authentication);
             }
 
