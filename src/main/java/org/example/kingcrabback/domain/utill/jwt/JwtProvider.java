@@ -1,13 +1,12 @@
-package org.example.kingcrabback.domain.utill.jwt.auth;
+package org.example.kingcrabback.domain.utill.jwt;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import jakarta.servlet.http.HttpServletRequest;
-import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
-import org.example.kingcrabback.domain.user.controller.TokenResponse;
+import org.example.kingcrabback.domain.utill.jwt.auth.AuthDetailsService;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;

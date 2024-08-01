@@ -5,6 +5,7 @@ import org.example.kingcrabback.domain.comment.dto.request.CommentRequest;
 import org.example.kingcrabback.domain.comment.entity.Comment;
 import org.example.kingcrabback.domain.comment.repository.CommentRepository;
 import org.example.kingcrabback.domain.post.repository.PostRepository;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;

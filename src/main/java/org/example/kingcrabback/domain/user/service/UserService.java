@@ -5,12 +5,10 @@ import org.example.kingcrabback.domain.user.controller.LoginRequest;
 import org.example.kingcrabback.domain.user.controller.TokenResponse;
 import org.example.kingcrabback.domain.user.entity.User;
 import org.example.kingcrabback.domain.user.repository.UserRepository;
-import org.example.kingcrabback.domain.utill.jwt.auth.JwtProvider;
+import org.example.kingcrabback.domain.utill.jwt.JwtProvider;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor

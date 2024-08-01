@@ -1,14 +1,15 @@
-package org.example.kingcrabback.domain.utill.config;
+package org.example.kingcrabback.domain.utill;
 
 import lombok.RequiredArgsConstructor;
-import org.example.kingcrabback.domain.utill.jwt.auth.filter.JwtTokenFilter;
-import org.example.kingcrabback.domain.utill.jwt.auth.JwtProvider;
+import org.example.kingcrabback.domain.utill.filter.JwtTokenFilter;
+import org.example.kingcrabback.domain.utill.jwt.JwtProvider;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.annotation.web.configurers.FormLoginConfigurer;
 import org.springframework.security.config.annotation.web.configurers.HttpBasicConfigurer;
@@ -58,5 +59,10 @@ public class SecurityConfig {
                 handler.authenticationEntryPoint(new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED)));
 
         return http.build();
+    }
+
+    @Bean
+    public WebSecurityCustomizer webSecurityCustomizer() {
+        return (web) -> web.ignoring().anyRequest();
     }
 }

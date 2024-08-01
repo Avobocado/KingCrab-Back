@@ -1,4 +1,4 @@
-package org.example.kingcrabback.domain.utill.jwt.auth;
+package org.example.kingcrabback.domain.utill.jwt;
 
 import lombok.Getter;
 import lombok.Setter;
