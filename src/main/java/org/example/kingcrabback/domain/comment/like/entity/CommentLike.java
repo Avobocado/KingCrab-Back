@@ -9,7 +9,6 @@ import org.example.kingcrabback.domain.user.entity.User;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-@RequiredArgsConstructor
 @Getter
 @Setter
 public class CommentLike {
@@ -18,11 +17,11 @@ public class CommentLike {
     private long id;
 
     @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false)
+    @JoinColumn(name = "user_id_like", nullable = false)
     private User user;
 
     @ManyToOne
-    @JoinColumn(name = "post_id", nullable = false)
+    @JoinColumn(name = "post_id_like", nullable = false)
     private Post post;
 
     @ManyToOne
