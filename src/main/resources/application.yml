@@ -14,7 +14,8 @@ spring:
       jdbc:
         batch_size: 200
     open-in-view: false
-
-
-
-
+jwt:
+  access-time: 234567
+  prefix: Bearer
+  header: Authorization
+  secret-key: sdfsdfdsASDFASDFASDF
