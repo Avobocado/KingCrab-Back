@@ -5,6 +5,7 @@ import org.example.kingcrabback.domain.utill.filter.JwtTokenFilter;
 import org.example.kingcrabback.domain.utill.jwt.JwtProvider;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -45,18 +46,22 @@ public class SecurityConfig {
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 );
 
-        http.addFilterBefore(new JwtTokenFilter(jwtProvider),
-                UsernamePasswordAuthenticationFilter.class);
+        http
+                .addFilterBefore(new JwtTokenFilter(jwtProvider),
+                UsernamePasswordAuthenticationFilter.class)
 
         http
                 .cors(Customizer.withDefaults())
-                .authorizeRequests(auth -> auth
+                .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/login","/signup","/","post/read","comment/read").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/post/create").authenticated()
                         .anyRequest().authenticated()
                 );
 
         http.exceptionHandling(handler ->
                 handler.authenticationEntryPoint(new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED)));
+
+
 
         return http.build();
     }
