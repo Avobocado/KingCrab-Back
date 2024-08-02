@@ -27,6 +27,7 @@ import org.springframework.web.cors.CorsUtils;
 @RequiredArgsConstructor
 @Configuration
 public class SecurityConfig {
+
     private final JwtProvider jwtProvider;
 
     @Bean
@@ -38,29 +39,15 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
                 .csrf().disable()
-                        .formLogin().and().cors().disable()
-                        .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-
-        http.addFilterBefore(new JwtTokenFilter(jwtProvider), UsernamePasswordAuthenticationFilter.class);
-
-
-        http.cors(Customizer.withDefaults())
-                        .authorizeRequests(
-                                auth -> auth.antMatchers("/signup", "/login").permitAll()
-                                        .anyRequest().authenticated()
-
-                        );
-
-        http.exceptionHandling(handler ->
-                handler.authenticationEntryPoint(new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED)));
-
-
+                .cors().and()
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
+                .authorizeRequests()
+                .antMatchers("/signup", "/login").permitAll()
+                .anyRequest().authenticated().and()
+                .exceptionHandling()
+                .authenticationEntryPoint(new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED)).and()
+                .addFilterBefore(new JwtTokenFilter(jwtProvider), UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
-    }
-
-    @Bean
-    public WebSecurityCustomizer webSecurityCustomizer() {
-        return (web) -> web.ignoring().anyRequest();
     }
 }
