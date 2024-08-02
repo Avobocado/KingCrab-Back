@@ -14,13 +14,21 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-    @RequiredArgsConstructor
+@RequiredArgsConstructor
 public class JwtTokenFilter extends OncePerRequestFilter {
 
     private final JwtProvider jwtProvider;
 
     @Override
-    public void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws IOException, ServletException {
+    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws IOException, ServletException {
+        String requestURI = request.getRequestURI();
+
+        // /login과 /signup 요청은 필터링 X
+        if ("/login".equals(requestURI) || "/signup".equals(requestURI)) {
+            filterChain.doFilter(request, response);
+            return;
+        }
+
         try {
             String token = jwtProvider.resolveToken(request);
 
@@ -29,8 +37,8 @@ public class JwtTokenFilter extends OncePerRequestFilter {
                 return;
             }
 
-                Authentication authentication = jwtProvider.getAuthentication(token);
-                SecurityContextHolder.getContext().setAuthentication(authentication);
+            Authentication authentication = jwtProvider.getAuthentication(token);
+            SecurityContextHolder.getContext().setAuthentication(authentication);
 
             filterChain.doFilter(request, response);
         } catch (RuntimeException e) {
