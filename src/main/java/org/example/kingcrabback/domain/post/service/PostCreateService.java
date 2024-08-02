@@ -1,11 +1,11 @@
 package org.example.kingcrabback.domain.post.service;
 
-import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.example.kingcrabback.domain.post.dto.PostRequest;
 import org.example.kingcrabback.domain.post.entity.Post;
 import org.example.kingcrabback.domain.post.repository.PostRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor

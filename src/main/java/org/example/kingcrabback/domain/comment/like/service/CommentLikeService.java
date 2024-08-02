@@ -11,8 +11,8 @@ import org.example.kingcrabback.domain.user.repository.UserRepository;
 import org.example.kingcrabback.domain.post.repository.PostRepository;
 import org.example.kingcrabback.domain.comment.repository.CommentRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import jakarta.transaction.Transactional;
 import java.util.Optional;
 
 @Service

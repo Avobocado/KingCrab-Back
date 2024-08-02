@@ -1,12 +1,13 @@
 package org.example.kingcrabback.domain.post.entity;
 
-import jakarta.persistence.*;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.example.kingcrabback.domain.comment.entity.Comment;
 
+import javax.persistence.*;
 import java.util.List;
 
 @Entity
@@ -31,4 +32,5 @@ public class Post {
         this.title = title;
         this.content = content;
     }
+
 }

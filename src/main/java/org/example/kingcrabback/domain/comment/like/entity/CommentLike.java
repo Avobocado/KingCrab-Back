@@ -1,10 +1,11 @@
 package org.example.kingcrabback.domain.comment.like.entity;
 
-import jakarta.persistence.*;
 import lombok.*;
 import org.example.kingcrabback.domain.comment.entity.Comment;
 import org.example.kingcrabback.domain.post.entity.Post;
 import org.example.kingcrabback.domain.user.entity.User;
+
+import javax.persistence.*;
 
 @Entity
 @NoArgsConstructor

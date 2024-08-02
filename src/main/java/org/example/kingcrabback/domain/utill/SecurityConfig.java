@@ -21,6 +21,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.HttpStatusEntryPoint;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.cors.CorsUtils;
 
 @EnableWebSecurity
 @RequiredArgsConstructor
@@ -36,27 +37,19 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
-                .csrf(AbstractHttpConfigurer::disable)
-                .httpBasic(HttpBasicConfigurer::disable)
-                .formLogin(FormLoginConfigurer::disable)
-                .logout(LogoutConfigurer::disable);
+                .csrf().disable()
+                        .formLogin().and().cors().disable()
+                        .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
-        http
-                .sessionManagement((session) -> session
-                        .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                );
+        http.addFilterBefore(new JwtTokenFilter(jwtProvider), UsernamePasswordAuthenticationFilter.class);
 
-        http
-                .addFilterBefore(new JwtTokenFilter(jwtProvider),
-                UsernamePasswordAuthenticationFilter.class);
 
-        http
-                .cors(Customizer.withDefaults())
-                .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/login","/signup","/","post/read","comment/read").permitAll()
-                        .requestMatchers(HttpMethod.POST, "/post/create").authenticated()
-                        .anyRequest().authenticated()
-                );
+        http.cors(Customizer.withDefaults())
+                        .authorizeRequests(
+                                auth -> auth.antMatchers("/signup", "/login").permitAll()
+                                        .anyRequest().authenticated()
+
+                        );
 
         http.exceptionHandling(handler ->
                 handler.authenticationEntryPoint(new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED)));

@@ -21,7 +21,7 @@ public class CreateComment {
         Comment comment = Comment.builder()
                 .comment(commentRequest.getComment())
                 .now(LocalDateTime.now())
-                .username(postRepository.findById(commentRequest.getId()).orElseThrow(()->new RuntimeException("존재하지 않는 PostId입니다.")).getName())
+                .username(SecurityContextHolder.getContext().getAuthentication().getName())
                 .post(postRepository.findById(commentRequest.getId()).orElseThrow(()->new RuntimeException("존재하지 않는 PostId입니다.")))
                 .build();
         commentRepository.save(comment);
