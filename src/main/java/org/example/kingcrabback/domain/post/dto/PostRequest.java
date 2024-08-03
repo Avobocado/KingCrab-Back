@@ -10,14 +10,12 @@ import org.example.kingcrabback.domain.post.entity.Post;
 @Getter
 @Setter
 public class PostRequest {
-    private String name;
     private String title;
     private String content;
 
 
     @Builder
     public PostRequest(String title, String content, String name) {
-        this.name = name;
         this.title = title;
         this.content = content;
 
@@ -27,7 +25,6 @@ public class PostRequest {
         return Post.builder()
                 .content(content)
                 .title(title)
-                .name(name)
                 .build();
     }
 
