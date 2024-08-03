@@ -7,6 +7,7 @@ import org.example.kingcrabback.domain.comment.repository.CommentRepository;
 import org.example.kingcrabback.domain.post.repository.PostRepository;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 
@@ -16,6 +17,7 @@ public class CreateComment {
     private final CommentRepository commentRepository;
     private final PostRepository postRepository;
 
+    @Transactional
     //save에서는 commentRequest의 Id가 Post의 Id를 뜻한다.
     public void createComment(CommentRequest commentRequest) {
         Comment comment = Comment.builder()
