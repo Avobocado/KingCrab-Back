@@ -2,6 +2,7 @@ package org.example.kingcrabback.domain.post.like.service;
 
 import lombok.RequiredArgsConstructor;
 import org.example.kingcrabback.domain.post.like.dto.PostLikeRequest;
+import org.example.kingcrabback.domain.post.like.dto.PostLikeResponse;
 import org.example.kingcrabback.domain.post.like.entity.PostLike;
 import org.example.kingcrabback.domain.post.like.repository.PostLikeRepository;
 import org.example.kingcrabback.domain.post.entity.Post;
@@ -22,36 +23,26 @@ public class PostLikeService {
     private final UserFacade userFacade;
 
     @Transactional
-    public String likePost(Long postId) {
-        Optional<Post> postOptional = postRepository.findById(postId);
+    public PostLikeResponse execute(Long id) {
+        Post post = postRepository.findById(id).orElseThrow(() -> new RuntimeException(""));
         User user = userFacade.getCurrentUser();
-        if (postOptional.isEmpty()) {
-            return "유저 또는 포스트를 찾을 수 없습니다.";
-        }
-
-        Post post = postOptional.get();
-
-        Optional<PostLike> postLikeOptional = postLikeRepository.findByUserAndPost(user, post);
 
         if (isAlreadyLiked(post, user)) {
-            // 이미 좋아요를 눌렀다면, 좋아요를 취소하고 뉴스의 좋아요 수를 감소시킴
             postLikeRepository.deleteByUserAndPost(user, post);
             post.minusLike();
+            return new PostLikeResponse(post.getCount(), Boolean.FALSE);
         }
 
-        if (postLikeOptional.isEmpty()) {
-            PostLike postLike = new PostLike();
-            postLike.setUser(user);
-            postLike.setPost(post);
-            postLikeRepository.save(postLike);
-            return "좋아요 추가 성공^^";
-        } else {
-            // PostLike already exists
-            return "이미 좋아요를 누르셨습니다.";
-        }
+        postLikeRepository.save(
+                PostLike.builder()
+                        .user(user)
+                        .post(post)
+                        .build()
+        );
+        post.addLike();
+        return new PostLikeResponse(post.getCount(), Boolean.TRUE);
     }
 
     private boolean isAlreadyLiked(Post post, User user) {
         return postLikeRepository.existsByUserAndPost(user, post);
-    }
-}
+    }}

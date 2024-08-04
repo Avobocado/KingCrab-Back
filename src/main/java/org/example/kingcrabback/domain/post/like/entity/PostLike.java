@@ -12,6 +12,7 @@ import javax.persistence.*;
 @Getter
 @Setter
 @EqualsAndHashCode
+@Builder
 public class PostLike {
 
     @Id
@@ -25,4 +26,15 @@ public class PostLike {
     @ManyToOne
     @JoinColumn(name = "post_id", nullable = false)
     private Post post;
+
+    @Column(columnDefinition = "INT")
+    private Integer count;
+
+    public void addLike() {
+        this.count += 1;
+    }
+
+    public void minusLike() {
+        this.count -= 1;
+    }
 }
