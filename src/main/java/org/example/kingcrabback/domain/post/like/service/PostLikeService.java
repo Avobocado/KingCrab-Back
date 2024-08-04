@@ -1,7 +1,6 @@
 package org.example.kingcrabback.domain.post.like.service;
 
 import lombok.RequiredArgsConstructor;
-import org.example.kingcrabback.domain.post.like.dto.PostLikeRequest;
 import org.example.kingcrabback.domain.post.like.dto.PostLikeResponse;
 import org.example.kingcrabback.domain.post.like.entity.PostLike;
 import org.example.kingcrabback.domain.post.like.repository.PostLikeRepository;
@@ -9,11 +8,8 @@ import org.example.kingcrabback.domain.post.entity.Post;
 import org.example.kingcrabback.domain.post.repository.PostRepository;
 import org.example.kingcrabback.domain.user.entity.User;
 import org.example.kingcrabback.domain.user.facade.UserFacade;
-import org.example.kingcrabback.domain.user.repository.UserRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor

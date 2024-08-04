@@ -22,9 +22,19 @@ public class Comment {
 
     private LocalDateTime now;
 
+    private Integer count;
+
     @ManyToOne
     private Post post;
     public void updateComment(String comment) {
         this.comment = comment;
+    }
+
+    public void addLike() {
+        this.count += 1;
+    }
+
+    public void minusLike() {
+        this.count -= 1;
     }
 }

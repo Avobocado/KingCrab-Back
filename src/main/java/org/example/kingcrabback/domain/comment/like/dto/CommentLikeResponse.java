@@ -5,7 +5,7 @@ import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public class CommentLikeRequest {
-    private final String username;
-    private final Long id;
+public class CommentLikeResponse {
+    private Integer count;
+    private boolean click;
 }

@@ -3,6 +3,7 @@ package org.example.kingcrabback.domain.post.like.entity;
 import lombok.*;
 import org.example.kingcrabback.domain.post.entity.Post;
 import org.example.kingcrabback.domain.user.entity.User;
+import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
 
@@ -30,11 +31,5 @@ public class PostLike {
     @Column(columnDefinition = "INT")
     private Integer count;
 
-    public void addLike() {
-        this.count += 1;
-    }
 
-    public void minusLike() {
-        this.count -= 1;
-    }
 }

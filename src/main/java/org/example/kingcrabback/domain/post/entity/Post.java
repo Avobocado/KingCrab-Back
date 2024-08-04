@@ -37,7 +37,6 @@ public class Post {
         this.title = title;
         this.content = content;
     }
-
     public void addLike() {
         this.count += 1;
     }
