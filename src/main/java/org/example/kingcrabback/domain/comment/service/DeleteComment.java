@@ -15,7 +15,6 @@ import org.springframework.transaction.annotation.Transactional;
 public class DeleteComment {
 
     private final CommentRepository commentRepository;
-    private final PostRepository postRepository;
     private final UserFacade userFacade;
 
     @Transactional
