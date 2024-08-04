@@ -7,14 +7,14 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/likes")
+@RequestMapping("/post")
 @RequiredArgsConstructor
 public class PostLikeController {
     private final PostLikeService postLikeService;
 
-    @PostMapping
-    public ResponseEntity<String> likePost(@RequestBody PostLikeRequest postLikeRequest) {
-        String result = postLikeService.likePost(postLikeRequest);
+    @PostMapping("/like/{post-id}")
+    public ResponseEntity<String> likePost(@PathVariable(value = "post-id")Long id) {
+        String result = postLikeService.likePost(id);
         return ResponseEntity.ok(result);
     }
 }

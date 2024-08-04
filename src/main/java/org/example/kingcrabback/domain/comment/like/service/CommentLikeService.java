@@ -7,6 +7,7 @@ import org.example.kingcrabback.domain.comment.like.entity.CommentLike;
 import org.example.kingcrabback.domain.comment.like.repository.CommentLikeRepository;
 import org.example.kingcrabback.domain.post.entity.Post;
 import org.example.kingcrabback.domain.user.entity.User;
+import org.example.kingcrabback.domain.user.facade.UserFacade;
 import org.example.kingcrabback.domain.user.repository.UserRepository;
 import org.example.kingcrabback.domain.post.repository.PostRepository;
 import org.example.kingcrabback.domain.comment.repository.CommentRepository;
@@ -20,28 +21,24 @@ import java.util.Optional;
 public class CommentLikeService {
 
     private final CommentLikeRepository commentLikeRepository;
-    private final UserRepository userRepository;
     private final PostRepository postRepository;
     private final CommentRepository commentRepository;
+    private final UserFacade userFacade;
 
     @Transactional
-    public String likeComment(CommentLikeRequest request) {
-        Optional<User> userOptional = userRepository.findByUserName(request.getUsername());
-        if (userOptional.isEmpty()) {
-            return "사용자를 찾을 수 없습니다.";
-        }
+    public String likeComment(Long postId, Long commentId) {
+        User user = userFacade.getCurrentUser();
 
-        Optional<Post> postOptional = postRepository.findById(request.getPostId());
+        Optional<Post> postOptional = postRepository.findById(postId);
         if (postOptional.isEmpty()) {
             return "게시물을 찾을 수 없습니다.";
         }
 
-        Optional<Comment> commentOptional = commentRepository.findById(request.getCommentId());
+        Optional<Comment> commentOptional = commentRepository.findById(commentId);
         if (commentOptional.isEmpty()) {
             return "댓글을 찾을 수 없습니다.";
         }
 
-        User user = userOptional.get();
         Post post = postOptional.get();
         Comment comment = commentOptional.get();
 
