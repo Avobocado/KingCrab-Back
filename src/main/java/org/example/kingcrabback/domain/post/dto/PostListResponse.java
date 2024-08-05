@@ -14,11 +14,13 @@ public class PostListResponse {
     private String title;
     private String content;
     private Long PostId;
+    private Integer count;
 
     public PostListResponse(Post post){
         this.name = SecurityContextHolder.getContext().getAuthentication().getName();
         this.title = post.getTitle();
         this.content = post.getContent();
         this.PostId = post.getId();
+        this.count = post.getCount();
     }
 }
