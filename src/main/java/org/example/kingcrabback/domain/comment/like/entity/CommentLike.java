@@ -1,28 +1,30 @@
 package org.example.kingcrabback.domain.comment.like.entity;
 
-import jakarta.persistence.*;
 import lombok.*;
 import org.example.kingcrabback.domain.comment.entity.Comment;
 import org.example.kingcrabback.domain.post.entity.Post;
 import org.example.kingcrabback.domain.user.entity.User;
+import org.springframework.stereotype.Component;
+
+import javax.persistence.*;
 
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-@RequiredArgsConstructor
 @Getter
 @Setter
+@Builder
 public class CommentLike {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false)
+    @JoinColumn(name = "user_id_like", nullable = false)
     private User user;
 
     @ManyToOne
-    @JoinColumn(name = "post_id", nullable = false)
+    @JoinColumn(name = "post_id_like", nullable = false)
     private Post post;
 
     @ManyToOne

@@ -16,7 +16,7 @@ public class UserController {
         return userService.login(loginRequest);
     }
 
-    @PostMapping("signup")
+    @PostMapping("/signup")
     public void signup(@RequestBody LoginRequest loginRequest) {
         userService.signup(loginRequest);
     }

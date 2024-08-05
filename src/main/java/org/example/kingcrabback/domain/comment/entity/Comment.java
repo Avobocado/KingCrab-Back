@@ -1,9 +1,10 @@
 package org.example.kingcrabback.domain.comment.entity;
 
-import jakarta.persistence.*;
 import lombok.*;
 import org.example.kingcrabback.domain.post.entity.Post;
+import org.example.kingcrabback.domain.user.entity.User;
 
+import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
@@ -21,12 +22,19 @@ public class Comment {
 
     private LocalDateTime now;
 
+    private Integer count;
 
-
+    @ManyToOne
+    private Post post;
     public void updateComment(String comment) {
         this.comment = comment;
     }
 
-    @ManyToOne
-    private Post post;
+    public void addLike() {
+        this.count += 1;
+    }
+
+    public void minusLike() {
+        this.count -= 1;
+    }
 }

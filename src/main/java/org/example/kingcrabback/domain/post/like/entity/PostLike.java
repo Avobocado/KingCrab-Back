@@ -1,9 +1,11 @@
 package org.example.kingcrabback.domain.post.like.entity;
 
-import jakarta.persistence.*;
 import lombok.*;
 import org.example.kingcrabback.domain.post.entity.Post;
 import org.example.kingcrabback.domain.user.entity.User;
+import org.springframework.stereotype.Component;
+
+import javax.persistence.*;
 
 @Entity
 @NoArgsConstructor
@@ -11,6 +13,7 @@ import org.example.kingcrabback.domain.user.entity.User;
 @Getter
 @Setter
 @EqualsAndHashCode
+@Builder
 public class PostLike {
 
     @Id
@@ -24,4 +27,9 @@ public class PostLike {
     @ManyToOne
     @JoinColumn(name = "post_id", nullable = false)
     private Post post;
+
+    @Column(columnDefinition = "INT")
+    private Integer count;
+
+
 }

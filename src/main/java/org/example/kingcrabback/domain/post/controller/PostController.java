@@ -25,17 +25,17 @@ public class PostController {
         postCreateService.createPost(postRequest);
     }
 
-    @DeleteMapping("{id}")
+    @DeleteMapping("/delete/{id}")
     public void deletePost(@PathVariable Long id){
         postDeleteService.deletePost(id);
     }
 
-    @PatchMapping("{id}")
+    @PatchMapping("/update/{id}")
     public void updatePost(@PathVariable Long id, @RequestBody PostRequest postRequest){
         postUpdateService.updatePost(id, postRequest);
     }
 
-    @GetMapping()
+    @GetMapping("/read")
     public List<PostListResponse> readAllPost(){
         return postAllReadService.readAllPost();
     }
