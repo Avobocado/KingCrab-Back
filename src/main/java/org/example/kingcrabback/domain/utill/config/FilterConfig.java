@@ -1,4 +1,4 @@
-package org.example.kingcrabback.domain.utill;
+package org.example.kingcrabback.domain.utill.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;

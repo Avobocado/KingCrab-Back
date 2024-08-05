@@ -1,7 +1,6 @@
 package org.example.kingcrabback.domain.post.like.controller;
 
 import lombok.RequiredArgsConstructor;
-import org.example.kingcrabback.domain.post.like.dto.PostLikeRequest;
 import org.example.kingcrabback.domain.post.like.service.PostLikeService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

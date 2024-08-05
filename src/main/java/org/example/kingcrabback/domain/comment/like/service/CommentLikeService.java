@@ -2,13 +2,11 @@ package org.example.kingcrabback.domain.comment.like.service;
 
 import lombok.RequiredArgsConstructor;
 import org.example.kingcrabback.domain.comment.entity.Comment;
-import org.example.kingcrabback.domain.comment.like.dto.CommentLikeRequest;
 import org.example.kingcrabback.domain.comment.like.entity.CommentLike;
 import org.example.kingcrabback.domain.comment.like.repository.CommentLikeRepository;
 import org.example.kingcrabback.domain.post.entity.Post;
 import org.example.kingcrabback.domain.user.entity.User;
 import org.example.kingcrabback.domain.user.facade.UserFacade;
-import org.example.kingcrabback.domain.user.repository.UserRepository;
 import org.example.kingcrabback.domain.post.repository.PostRepository;
 import org.example.kingcrabback.domain.comment.repository.CommentRepository;
 import org.springframework.stereotype.Service;
