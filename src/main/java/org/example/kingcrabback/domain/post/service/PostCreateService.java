@@ -18,7 +18,7 @@ public class PostCreateService {
     public void createPost(PostRequest postRequest){
          postRepository.save(
             Post.builder()
-                    .name(facade.getCurrentUser().getUserName())
+                    .username(facade.getCurrentUser().getUserName())
                     .title(postRequest.getTitle())
                     .content(postRequest.getContent())
                     .build()

@@ -15,7 +15,7 @@ public class PostReadAllService {
     public List<PostListResponse> readAllPost(){
         return postRepository.findAll()
                 .stream()
-                .map(PostListResponse :: new)
+                .map(PostListResponse::new)
                 .toList();
     }
 }

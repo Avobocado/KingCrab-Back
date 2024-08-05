@@ -13,6 +13,7 @@ public class CommentLikeController {
 
     @PostMapping("/like/{post-id}/{comment-id}")
     public String like(@PathVariable(value = "post-id") Long postId, @PathVariable(value = "comment-id")Long commentId) {
-        return commentLikeService.likeComment(postId, commentId);
+      //  return commentLikeService.likeComment(postId, commentId);
+        return "a";
     }
 }
