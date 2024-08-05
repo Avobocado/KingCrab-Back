@@ -2,7 +2,6 @@ package org.example.kingcrabback.domain.comment.service;
 
 import lombok.RequiredArgsConstructor;
 import org.example.kingcrabback.domain.comment.dto.response.CommentResponse;
-import org.example.kingcrabback.domain.comment.entity.Comment;
 import org.example.kingcrabback.domain.comment.repository.CommentRepository;
 import org.example.kingcrabback.domain.post.repository.PostRepository;
 import org.springframework.stereotype.Service;
@@ -20,7 +19,7 @@ public class ReadComment {
     public List<CommentResponse> readALlComment(Long postId) {
          return commentRepository.findAll().stream()
                  .filter(comment -> comment.getPost().getId().equals(postId))
-                .map(comment-> new CommentResponse(comment.getComment(),comment.getNow(),comment.getUsername()))
+                .map(comment-> new CommentResponse(comment.getUsername(),comment.getNow(),comment.getComment()))
                 .toList();
     }
 }
