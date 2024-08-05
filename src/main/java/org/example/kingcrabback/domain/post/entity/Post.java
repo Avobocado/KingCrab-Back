@@ -25,6 +25,8 @@ public class Post {
     private String username;
     private String title;
     private String content;
+
+    @Column(columnDefinition = "INT")
     private Integer count;
 
     @OneToMany(mappedBy = "post")

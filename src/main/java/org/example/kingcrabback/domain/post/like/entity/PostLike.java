@@ -12,7 +12,6 @@ import javax.persistence.*;
 @AllArgsConstructor
 @Getter
 @Setter
-@EqualsAndHashCode
 @Builder
 public class PostLike {
 
@@ -27,9 +26,6 @@ public class PostLike {
     @ManyToOne
     @JoinColumn(name = "post_id", nullable = false)
     private Post post;
-
-    @Column(columnDefinition = "INT")
-    private Integer count;
 
 
 }
