@@ -19,7 +19,7 @@ public class ReadComment {
     public List<CommentResponse> readALlComment(Long postId) {
          return commentRepository.findAll().stream()
                  .filter(comment -> comment.getPost().getId().equals(postId))
-                .map(comment-> new CommentResponse(comment.getUsername(),comment.getNow(),comment.getComment(),comment.getId()))
+                .map(comment-> new CommentResponse(comment.getUsername(),comment.getNow(),comment.getComment(),comment.getId(),comment.getCount()))
                 .toList();
     }
 }

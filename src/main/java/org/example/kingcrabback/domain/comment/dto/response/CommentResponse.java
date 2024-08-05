@@ -15,11 +15,13 @@ public class CommentResponse {
     private LocalDateTime now;
     private String comment;
     private Long commentId;
+    private Integer count;
 
-    public CommentResponse(String username, LocalDateTime now, String comment, Long commentId) {
+    public CommentResponse(String username, LocalDateTime now, String comment, Long commentId, Integer count) {
         this.username = username;
         this.now = now;
         this.comment = comment;
         this.commentId = commentId;
+        this.count = count;
     }
 }
