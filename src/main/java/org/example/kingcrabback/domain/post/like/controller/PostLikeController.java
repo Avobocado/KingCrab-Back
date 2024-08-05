@@ -12,8 +12,9 @@ import org.springframework.web.bind.annotation.*;
 public class PostLikeController {
     private final PostLikeService postLikeService;
 
-    @PostMapping("/like/{id}")
-    public PostLikeResponse likePost(@PathVariable Long id) {
-         return postLikeService.execute(id);
+    @PostMapping("/like/{post-id}")
+    public PostLikeResponse likePost(@PathVariable(value = "post-id") Long postId) {
+
+        return postLikeService.execute(postId);
     }
 }

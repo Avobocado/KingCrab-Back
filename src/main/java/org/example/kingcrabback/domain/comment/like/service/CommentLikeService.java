@@ -29,7 +29,7 @@ public class CommentLikeService {
 
     @Transactional
     public CommentLikeResponse execute(Long id) {
-        Comment comment = commentRepository.findById(id).orElseThrow(() -> new RuntimeException(""));
+        Comment comment = commentRepository.findById(id).orElseThrow(() -> new RuntimeException("Post가 없습니다."));
         User user = userFacade.getCurrentUser();
 
         if (isAlreadyLiked(comment, user)) {

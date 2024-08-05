@@ -6,6 +6,5 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public class PostLikeRequest {
-    private final String username;
     private final Long postId;
 }

@@ -21,6 +21,7 @@ public class PostCreateService {
                     .username(facade.getCurrentUser().getUserName())
                     .title(postRequest.getTitle())
                     .content(postRequest.getContent())
+                    .count(0)
                     .build()
         );
     }

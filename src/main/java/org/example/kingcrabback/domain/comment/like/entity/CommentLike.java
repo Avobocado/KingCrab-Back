@@ -20,20 +20,12 @@ public class CommentLike {
     private long id;
 
     @ManyToOne
-    @JoinColumn(name = "user_id_like", nullable = false)
+    @JoinColumn(name = "user_id", nullable = false)
     private User user;
-
-    @ManyToOne
-    @JoinColumn(name = "post_id_like", nullable = false)
-    private Post post;
 
     @ManyToOne
     @JoinColumn(name = "comment_id", nullable = false)
     private Comment comment;
 
-    public CommentLike(User user, Post post, Comment comment) {
-        this.user = user;
-        this.post = post;
-        this.comment = comment;
-    }
+
 }

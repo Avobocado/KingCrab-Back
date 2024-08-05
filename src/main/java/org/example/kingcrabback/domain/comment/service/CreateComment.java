@@ -25,6 +25,7 @@ public class CreateComment {
                 .now(LocalDateTime.now())
                 .username(SecurityContextHolder.getContext().getAuthentication().getName())
                 .post(postRepository.findById(commentRequest.getId()).orElseThrow(()->new RuntimeException("존재하지 않는 PostId입니다.")))
+                .count(0)
                 .build();
         commentRepository.save(comment);
     }

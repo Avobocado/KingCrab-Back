@@ -21,10 +21,13 @@ public class Comment {
 
     private LocalDateTime now;
 
-    private Integer count;
+    @Column(columnDefinition = "INT")
+    private Integer count = 0;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "post_id")
     private Post post;
+
     public void updateComment(String comment) {
         this.comment = comment;
     }

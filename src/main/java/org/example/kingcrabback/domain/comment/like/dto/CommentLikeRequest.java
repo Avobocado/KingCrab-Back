@@ -6,6 +6,5 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public class CommentLikeRequest {
-    private final String username;
-    private final Long id;
+    private final Long commentId;
 }

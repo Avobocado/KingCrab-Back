@@ -27,7 +27,7 @@ public class Post {
     private String content;
 
     @Column(columnDefinition = "INT")
-    private Integer count;
+    private Integer count = 0;
 
     @OneToMany(mappedBy = "post")
     private List<PostLike> postLikes = new ArrayList<>();
@@ -35,15 +35,21 @@ public class Post {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "post")
     private List<Comment> commentList;
 
-    public void updatePost(String title, String content){
+    public void updatePost(String title , String content){
         this.title = title;
         this.content = content;
     }
     public void addLike() {
+        if(this.count == null){
+            this.count = 0;
+        }
         this.count += 1;
     }
 
     public void minusLike() {
+        if(this.count == null){
+            this.count = 0;
+        }
         this.count -= 1;
     }
 }
