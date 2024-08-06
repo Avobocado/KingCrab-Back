@@ -1,6 +1,7 @@
 package org.example.kingcrabback.domain.utill.filter;
 
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import org.example.kingcrabback.domain.utill.jwt.JwtProvider;
 import org.springframework.security.core.Authentication;
@@ -24,7 +25,7 @@ public class JwtTokenFilter extends OncePerRequestFilter {
         String requestURI = request.getRequestURI();
 
         // /login과 /signup 요청은 필터링 X
-        if ("/login".equals(requestURI) || "/signup".equals(requestURI)) {
+        if ("/login".equals(requestURI) || "/signup".equals(requestURI) || "/post/read".equals(requestURI) || requestURI.startsWith("/comment/read/")) {
             filterChain.doFilter(request, response);
             return;
         }
