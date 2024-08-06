@@ -8,6 +8,8 @@ import org.example.kingcrabback.domain.user.facade.UserFacade;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
+
 @Service
 @RequiredArgsConstructor
 public class PostCreateService {
@@ -21,6 +23,7 @@ public class PostCreateService {
                     .username(facade.getCurrentUser().getUserName())
                     .title(postRequest.getTitle())
                     .content(postRequest.getContent())
+                    .now(LocalDateTime.now())
                     .count(0)
                     .build()
         );

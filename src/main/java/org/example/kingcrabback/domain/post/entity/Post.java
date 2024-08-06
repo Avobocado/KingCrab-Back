@@ -9,6 +9,7 @@ import org.example.kingcrabback.domain.comment.entity.Comment;
 import org.example.kingcrabback.domain.post.like.entity.PostLike;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,6 +26,7 @@ public class Post {
     private String username;
     private String title;
     private String content;
+    private LocalDateTime now;
 
     @Column(columnDefinition = "INT")
     private Integer count = 0;
