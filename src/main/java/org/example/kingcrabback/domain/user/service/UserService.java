@@ -5,6 +5,7 @@ import lombok.RequiredArgsConstructor;
 import org.example.kingcrabback.domain.user.controller.LoginRequest;
 import org.example.kingcrabback.domain.user.controller.TokenResponse;
 import org.example.kingcrabback.domain.user.entity.User;
+import org.example.kingcrabback.domain.user.exception.UsernameAlreadyExistException;
 import org.example.kingcrabback.domain.user.repository.UserRepository;
 import org.example.kingcrabback.domain.utill.jwt.JwtProvider;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -32,11 +33,15 @@ public class UserService {
 
     @Transactional
     public void signup(LoginRequest loginRequest) {
-        userRepository.save(
-                User.builder()
-                        .userName(loginRequest.getUserName())
-                        .password(passwordEncoder.encode(loginRequest.getPassword()))
-                        .build()
-        );
+        if(!userRepository.existsByUserName(loginRequest.getUserName())){
+            userRepository.save(
+                    User.builder()
+                            .userName(loginRequest.getUserName())
+                            .password(passwordEncoder.encode(loginRequest.getPassword()))
+                            .build()
+            );
+        }else{
+            throw UsernameAlreadyExistException.EXCEPTION;
+        }
     }
 }

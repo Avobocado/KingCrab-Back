@@ -4,11 +4,13 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.example.kingcrabback.domain.comment.entity.Comment;
 
 import java.time.LocalDateTime;
 
 @Getter
 @Builder
+@AllArgsConstructor
 @NoArgsConstructor
 public class CommentResponse {
     private String username;
@@ -16,12 +18,13 @@ public class CommentResponse {
     private String comment;
     private Long commentId;
     private Integer count;
+    private Integer countNum;
 
-    public CommentResponse(String username, LocalDateTime now, String comment, Long commentId, Integer count) {
-        this.username = username;
-        this.now = now;
-        this.comment = comment;
-        this.commentId = commentId;
-        this.count = count;
+    public CommentResponse(Comment comment) {
+        this.username = comment.getUsername();
+        this.now = comment.getNow();
+        this.comment = comment.getUsername();
+        this.commentId = comment.getId();
+        this.count = comment.getCount();
     }
 }
