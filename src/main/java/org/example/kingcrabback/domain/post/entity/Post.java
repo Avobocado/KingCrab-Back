@@ -38,6 +38,14 @@ public class Post {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "post")
     private List<Comment> commentList;
 
+    public void addComment() {
+        this.commentNum++;
+    }
+
+    public void removeComment() {
+        this.commentNum--;
+    }
+
     public void updatePost(String title , String content){
         this.title = title;
         this.content = content;

@@ -1,7 +1,9 @@
 package org.example.kingcrabback.domain.post.service;
 
 import lombok.RequiredArgsConstructor;
+import org.example.kingcrabback.domain.comment.dto.response.CommentResponse;
 import org.example.kingcrabback.domain.post.dto.PostListResponse;
+import org.example.kingcrabback.domain.post.dto.PostResponse;
 import org.example.kingcrabback.domain.post.repository.PostRepository;
 import org.springframework.stereotype.Service;
 

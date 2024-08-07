@@ -25,6 +25,7 @@ public class PostCreateService {
                     .content(postRequest.getContent())
                     .now(LocalDateTime.now())
                     .count(0)
+                    .commentNum(0)
                     .build()
         );
     }

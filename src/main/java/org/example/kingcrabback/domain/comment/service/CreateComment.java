@@ -27,6 +27,8 @@ public class CreateComment {
                 .post(postRepository.findById(commentRequest.getId()).orElseThrow(()->new RuntimeException("존재하지 않는 PostId입니다.")))
                 .count(0)
                 .build();
+
+        postRepository.findById(commentRequest.getId()).orElseThrow(()->new RuntimeException("")).addComment();
         commentRepository.save(comment);
     }
 }
