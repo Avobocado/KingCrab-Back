@@ -16,12 +16,14 @@ public class DeleteComment {
 
     private final CommentRepository commentRepository;
     private final UserFacade userFacade;
+    private final PostRepository postRepository;
 
     @Transactional
     public void deleteComment(Long commentId) {
             Comment comment = commentRepository.findById(commentId).orElseThrow(() -> CommentNotFoundException.EXCEPTION);
         if(userFacade.getCurrentUser().getUserName().equals(comment.getUsername())){
             commentRepository.delete(comment);
+            postRepository.findById(comment.getPost().getId()).orElseThrow(()-> new RuntimeException("")).removeComment();
         }else{
             throw UserMissMatchException.EXCEPTION;
         }
