@@ -26,7 +26,7 @@ public class PostListResponse {
     private Integer commentNum;
 
     public PostListResponse(Post post){
-        this.name = SecurityContextHolder.getContext().getAuthentication().getName();
+        this.name = post.getUsername();
         this.title = post.getTitle();
         this.content = post.getContent();
         this.PostId = post.getId();
