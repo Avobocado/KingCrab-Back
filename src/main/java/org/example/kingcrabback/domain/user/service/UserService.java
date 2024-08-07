@@ -5,6 +5,7 @@ import lombok.RequiredArgsConstructor;
 import org.example.kingcrabback.domain.user.controller.LoginRequest;
 import org.example.kingcrabback.domain.user.controller.TokenResponse;
 import org.example.kingcrabback.domain.user.entity.User;
+import org.example.kingcrabback.domain.user.exception.UserPasswordMissMatchException;
 import org.example.kingcrabback.domain.user.exception.UsernameAlreadyExistException;
 import org.example.kingcrabback.domain.user.repository.UserRepository;
 import org.example.kingcrabback.domain.utill.jwt.JwtProvider;
@@ -22,9 +23,9 @@ public class UserService {
 
     @Transactional
     public TokenResponse login(LoginRequest loginRequest) {
-        User user = userRepository.findByUserName(loginRequest.getUserName()).orElseThrow(()->new RuntimeException(""));
+        User user = userRepository.findByUserName(loginRequest.getUserName()).orElseThrow(()-> UsernameAlreadyExistException.EXCEPTION);
         if (!passwordEncoder.matches(loginRequest.getPassword(), user.getPassword())) {
-            throw new RuntimeException("asdf");
+            throw UserPasswordMissMatchException.EXCEPTION;
         }
         System.out.println(user.getUserName());
         return new TokenResponse(jwtProvider.createAccessToken(user.getUserName()));
