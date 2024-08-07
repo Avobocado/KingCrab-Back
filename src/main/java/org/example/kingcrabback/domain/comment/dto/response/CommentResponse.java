@@ -18,7 +18,6 @@ public class CommentResponse {
     private String comment;
     private Long commentId;
     private Integer count;
-    private Integer countNum;
 
     public CommentResponse(Comment comment) {
         this.username = comment.getUsername();
